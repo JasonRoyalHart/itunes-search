@@ -2,9 +2,7 @@
 
 function songSearch() {
   song = document.getElementById("song").value;
-  document.write("Searching for " + song + "<br><br>");
   var searchURL = makeURL(song);
-  document.write("Search URL: " + searchURL)
   getSongs(searchURL);
 }
 
@@ -29,10 +27,32 @@ function getSongs(URL) {
     dataType: "JSONP",
     method: "GET",
     crossDomain: true,
-    success: function(data) {document.write("<br><br>"+data.results[0]["trackName"]);}
+    success: function(data) {displayData(data)}
   });
 }
 
+function displayData(data) {
+      var results = data.results;
+      var html = '<div class="container">';
+		  html += '<div class="row">';
+      for (var i = 0; i < results.length; i++) {
+          var item = results[i];
+          html += '<div class="col-sm-4">';
+          html += '<div class="card">';
+          html += '<img class="card-img-top" src="{0}" alt="Card image cap">'.replace("{0}", item.artworkUrl100);
+          html += '<div class="card-block">';
+          html += '<h4 class="card-title">{0}</h4>'.replace("{0}", item.trackCensoredName);
+          html += '<p class="card-text">';
+          html += 'Artist: {0}'.replace("{0}", item.artistName);
+          html += '</p>';
+          html += '<a href="{0}" class="btn btn-primary">Preview</a>'.replace("{0}", item.previewUrl);
+          html += '</div>';
+          html += '</div>';
+          html += '</div>';
+
+      }
+      jQuery('#itunes-results').html(html);
+}
 
 
 function handleSearchResults(data) {
