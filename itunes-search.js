@@ -20,8 +20,7 @@ function makeURL(song) {
 }
 
 function getSongs(URL) {
-//  $.get(URL, function(response, status) { document.write(status) });
-//  jQuery('head').append(URL);
+  console.log("In getSongs");
   $.ajax({
     url: URL,
     dataType: "JSONP",
@@ -32,37 +31,37 @@ function getSongs(URL) {
 }
 
 function displayData(data) {
-      var results = data.results;
-      var html = '<div class="container">';
-		  html += '<div class="row">';
-      for (var i = 0; i < results.length; i++) {
-          var item = results[i];
-          html += '<div class="col-sm-4">';
-          html += '<div class="card">';
-          html += '<img class="card-img-top" src="{0}" alt="Card image cap">'.replace("{0}", item.artworkUrl100);
-          html += '<div class="card-block">';
-          html += '<h4 class="card-title">{0}</h4>'.replace("{0}", item.trackCensoredName);
-          html += '<p class="card-text">';
-          html += 'Artist: {0}'.replace("{0}", item.artistName);
-          html += '</p>';
-          html += '<a href="{0}" class="btn btn-primary">Preview</a>'.replace("{0}", item.previewUrl);
-          html += '</div>';
-          html += '</div>';
-          html += '</div>';
+  var results = data.results;
+  var html = '<div class="container">';
+	html += '<div class="row">';
+  for (var i = 0; i < results.length; i++) {
+      var item = results[i];
+      html += '<div class="col-sm-4">';
+      html += '<div class="card">';
+      html += '<img class="card-img-top" src="{0}" alt="Card image cap">'.replace("{0}", item.artworkUrl100);
+      html += '<div class="card-block">';
+      html += '<h4 class="card-title">{0}</h4>'.replace("{0}", item.trackCensoredName);
+      html += '<p class="card-text">';
+      html += 'Artist: {0}'.replace("{0}", item.artistName);
+      html += '</p>';
+      html += '<a href="{0}" class="btn btn-primary">Preview</a>'.replace("{0}", item.previewUrl);
+      html += '</div>';
+      html += '</div>';
+      html += '</div>';
 
-      }
-      jQuery('#itunes-results').html(html);
+  }
+  jQuery('#itunes-results').html(html);
 }
 
 
-function handleSearchResults(data) {
-  document.write(data);
-}
-
-function performSearch() {
-  var params = { term: jQuery('#search-keyword').val(), country: 'US', media: 'music', entity: 'musicTrack', attribute: 'artistTerm,albumTerm,songTerm,musicTrackTerm', limit: 20, callback: 'handleTunesSearchResults' };
-  var params = urlEncode(params);
-  var url = 'http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/wa/wsSearch?' + params;
-  var html = '<script src="' + url + '"><\/script>';
-  jQuery('head').append(html);
- }
+// function handleSearchResults(data) {
+//   document.write(data);
+// }
+//
+// function performSearch() {
+//   var params = { term: jQuery('#search-keyword').val(), country: 'US', media: 'music', entity: 'musicTrack', attribute: 'artistTerm,albumTerm,songTerm,musicTrackTerm', limit: 20, callback: 'handleTunesSearchResults' };
+//   var params = urlEncode(params);
+//   var url = 'http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/wa/wsSearch?' + params;
+//   var html = '<script src="' + url + '"><\/script>';
+//   jQuery('head').append(html);
+//  }
