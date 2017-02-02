@@ -20,7 +20,6 @@ function makeURL(song) {
 }
 
 function getSongs(URL) {
-  console.log("In getSongs");
   $.ajax({
     url: URL,
     dataType: "JSONP",
@@ -52,16 +51,3 @@ function displayData(data) {
   }
   jQuery('#itunes-results').html(html);
 }
-
-
-// function handleSearchResults(data) {
-//   document.write(data);
-// }
-//
-// function performSearch() {
-//   var params = { term: jQuery('#search-keyword').val(), country: 'US', media: 'music', entity: 'musicTrack', attribute: 'artistTerm,albumTerm,songTerm,musicTrackTerm', limit: 20, callback: 'handleTunesSearchResults' };
-//   var params = urlEncode(params);
-//   var url = 'http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/wa/wsSearch?' + params;
-//   var html = '<script src="' + url + '"><\/script>';
-//   jQuery('head').append(html);
-//  }
